@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+<title>Registration Form</title>
+<body>
+    <form>
+        <div class="container">
+            <h1>Registration Form</h1>
+        <hr>
+        <label for="username"><b>Nama Lengkap</b></label>
+        <input type="text" placeholder="Your Full Name" name="username" id="username" required>
+        <span class="error-message" id="username-error-message"></span>
+
+        <br>
+
+        <label for="email"><b>Email</b></label>
+        <input type="text" placeholder="example: test@example.com" name="email" id="email" required>
+        <span class="error-message" id="email-error-message"></span>
+        <br>
+
+        <label for="gender"><b>Jenis Kelamin</b></label>
+        <br>
+
+        <label>
+            <input type="radio" name="gender" value="Pria" id="genderPria" required>
+            <span>Pria</span>
+        </label>
+        <label>
+            <input type="radio" name="gender" value="wanita" id="genderWanita" required>
+            <span>Wanita</span>
+        </label>
+
+        <br>
+
+        <label class="mt-4"><b>Alamat</b></label>
+        <br>
+        <textarea name="address" id="address"></textarea>
+        <span class="error-message" id="address-error-message"></span>
+
+        <br>
+
+        <label class="mt-4"><b>Negara</b></label><br>
+        <span class="error-message" id="country-error-message"></span>
+            <select name="country" id="country" >
+                <option selected value>(Please Select a Country</option>
+                <option>Australia</option>
+                <option>Canada</option>
+                <option>India</option>
+                <option>Russia</option>
+                <option>USA</option>
+            </select>
+        <br>
+        
+        <label class="mt-4"><b>Kodepos</b></label>
+        <input type="text" placeholder="Kodepos" id="kodepos" minlength="3" maxlength="50" size="50">
+        <span class="error-message" id="kodepos-error-message"></span>
+        
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Password" name="psw" id="psw" required>
+        <span class="error-message" id="password-error-message"></span>
+
+        <label for="retypepassword"><b>Konfirmasi Password</b></label>
+        <input type="password" name="retypepassword" id="retypePsw" required>
+        <span class="error-message" id="retypePwd-error-message"></span>
+
+        <label for="agreement"><b>Syarat & Ketentuan</b></label><br>
+        <label>
+            <input type="checkbox" name="agreement" id="agreement" required>
+            <span class="ml-2" >Anda setuju dengan syarat dan ketentuan yang berlaku</span>
+        </label>
+        <hr>
+
+        <button type="submit" id="submit" class="registerBtn">Submit</button>
+    </div>
+</form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>
