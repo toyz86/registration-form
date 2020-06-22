@@ -9,16 +9,8 @@ $(document).ready(function(){
 
     const error_username = false;
     const error_email = false;
-    
-    $("#name").focusout(function(){
-        checkUsername();
-    });
 
-    $("#email").focusout(function(){
-        checkEmail();
-    });
-
-    function checkUsername(){
+    $("#username").keyup(function(){
         const name = $("#username").val();
         const regEx = /^[a-zA-Z ]*$/;
 
@@ -29,6 +21,7 @@ $(document).ready(function(){
             error_username = true
         } else {
             $("#username-error-message").hide();
+            $("#username").css({"border": "", "background-color": ""});
         }
         if (name.length < 3 || name.length > 50) {
             $("#username-error-message").html("Nama min. 3 karakter & max. 50 karakter");
@@ -37,6 +30,7 @@ $(document).ready(function(){
             error_username = true
         } else {
             $("#username-error-message").hide();
+            $("#username").css({"border": "", "background-color": ""});
         }
 
         if (!name.match(regEx) != ' ') {
@@ -46,10 +40,11 @@ $(document).ready(function(){
             error_username = true 
         } else {
             $("#username-error-message").hide();
+            $("#username").css({"border": "", "background-color": ""});
         }        
-    }
+    });
 
-    function checkEmail(){
+    $("#email").keyup(function(){
         const email = $("#email").val();
         const mailReq = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
         
@@ -60,21 +55,21 @@ $(document).ready(function(){
             error_email = true
         } else {
             $("#email-error-message").hide();
+            $("#email").css({"border": "", "background-color": ""});
         }
 
         if (!email.match(mailReq) != '') {
-            $("#email-error-message").html("email invalid");
+            $("#email-error-message").html("email tidak valid");
             $("#email-error-message").show();
             $("#email").css({"border": "1px solid #c51244", "background-color": "rgba(197, 18, 68, 0.10"});
             error_email = true
         } else {
             $("#email-error-message").hide();
+            $("#email").css({"border": "", "background-color": ""});
         }
-    }
+    });
 
     $("#submit").click(function(){
-        checkUsername();
-        checkEmail();
 
         if (error_username == false && error_email == false) {
             return true;
