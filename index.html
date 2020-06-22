@@ -14,13 +14,11 @@
             <h1>Registration Form</h1>
         <hr>
         <label for="username"><b>Nama Lengkap</b></label>
-        <input type="text" placeholder="Your Full Name" name="username" id="username" required>
+        <input type="text" placeholder="Your Full Name" class="username" id="username">
         <span class="error-message" id="username-error-message"></span>
 
-        <br>
-
         <label for="email"><b>Email</b></label>
-        <input type="text" placeholder="example: test@example.com" name="email" id="email" required>
+        <input type="text" placeholder="example: test@example.com" class="email" id="email">
         <span class="error-message" id="email-error-message"></span>
         <br>
 
@@ -28,11 +26,11 @@
         <br>
 
         <label>
-            <input type="radio" name="gender" value="Pria" id="genderPria" required>
+            <input type="radio" name="gender" value="Pria" id="genderPria">
             <span>Pria</span>
         </label>
         <label>
-            <input type="radio" name="gender" value="wanita" id="genderWanita" required>
+            <input type="radio" name="gender" value="wanita" id="genderWanita">
             <span>Wanita</span>
         </label>
 
@@ -62,16 +60,16 @@
         <span class="error-message" id="kodepos-error-message"></span>
         
         <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Password" name="psw" id="psw" required>
+        <input type="password" placeholder="Password" name="psw" id="psw">
         <span class="error-message" id="password-error-message"></span>
 
         <label for="retypepassword"><b>Konfirmasi Password</b></label>
-        <input type="password" name="retypepassword" id="retypePsw" required>
+        <input type="password" name="retypepassword" id="retypePsw">
         <span class="error-message" id="retypePwd-error-message"></span>
 
         <label for="agreement"><b>Syarat & Ketentuan</b></label><br>
         <label>
-            <input type="checkbox" name="agreement" id="agreement" required>
+            <input type="checkbox" name="agreement" id="agreement">
             <span class="ml-2" >Anda setuju dengan syarat dan ketentuan yang berlaku</span>
         </label>
         <hr>
