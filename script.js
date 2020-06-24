@@ -12,12 +12,22 @@ $(document).ready(function(){
     var error_email = false;
     var error_gender = false;
     var error_address = false;
+    var error_kodepos = false;
 
     $("#username").keyup(function(){
         check_username();
     });
     $("#email").keyup(function () {
         check_email();
+    });
+    $("#address").keyup(function () {
+        check_address();
+    });
+    $("#kodepos").keyup(function () {
+        check_kodepos();
+    });
+    $("#gender").keyup(function () {
+        check_gender();
     });
 
     function check_username(){
@@ -78,14 +88,77 @@ $(document).ready(function(){
         }
     }
 
+    function check_address(){
+        if ($('#address').val().length > 100) {
+            $("#address-error-message").html("Alamat tidak lebih dari 100 karakter");
+            $("#address-error-message").show();
+            $("#address").css({"border": "1px solid #c51244", "background-color": "rgba(197, 18, 68, 0.10"});
+            error_address = true;
+        } else {
+            $("#address-error-message").hide();
+            $("#address").css({"border": "", "background-color": ""});
+            if ($('#address').val().length == 0) {
+                $("#address-error-message").html("Alamat harus diisi");
+                $("#address-error-message").show();
+                $("#address").css({"border": "1px solid #c51244", "background-color": "rgba(197, 18, 68, 0.10"});
+                error_address = true;
+            } else {
+                $("#address-error-message").hide();
+                $("#address").css({"border": "", "background-color": ""});
+            }
+        }
+    }
+
+    function check_kodepos(){
+        const kodePos = $("#kodepos").val();
+        if (kodePos.length == 0){
+            $("#kodepos-error-message").html("Kodepos harus diisi");
+            $("#kodepos-error-message").show();
+            $("#kodepos").css({"border": "1px solid #c51244", "background-color": "rgba(197, 18, 68, 0.10"});
+            error_kodepos = true;
+        } else {
+            $("#country-error-message").hide();
+            $("#country").css({"border": "", "background-color": ""});
+            if (kodePos.length > 5){
+                $("#kodepos-error-message").html("Maksimal 5 Digit");
+                $("#kodepos-error-message").show();
+                $("#kodepos").css({"border": "1px solid #c51244", "background-color": "rgba(197, 18, 68, 0.10"});
+                error_kodepos = true;
+            } else {
+                $("#country-error-message").hide();
+                $("#country").css({"border": "", "background-color": ""});
+            }
+        }
+    }
+
+    function check_gender(){
+        const inputGender = $("input[type='radio']").val();
+        console.log('radio', inputGender);
+        if ($(inputGender).length == 0) {
+            $("#gender-error-message").html("Silahkan pilih gender");
+            $("#gender-error-message").show();
+            error_gender = true;
+        } else {
+            $("#gender-error-message").hide();
+        }
+
+    }
+
     $("#submit").click(function(){
         error_username = false;
         error_email = false;
+        error_address = false;
+        error_kodepos = false;
+        error_gender = false;
 
         check_username();
         check_email();
+        check_address();
+        check_kodepos();
+        check_gender();
 
-        if(error_username == false && error_email == false){
+        if(error_username == false && error_email == false 
+            && error_address == false && error_kodepos == false && error_gender == false){
             return true;
         } else {
             return false;
