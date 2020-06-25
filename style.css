@@ -70,3 +70,8 @@ a {
     position: absolute;
     top: 26px;
 }
+
+input.error {
+    border: 1px solid #c51244;
+    background-color: rgba(197, 18, 68, 0.10);
+}

@@ -23,15 +23,18 @@ $(document).ready(function(){
     $("#address").keyup(function () {
         check_address();
     });
-    $("#kodepos").keyup(function () {
+    $("#kodepos").on('keyup', function () {
+        var numVal = $(this).val().replace(/[^0-9.]/g, "");
+        $(this).val(numVal);
         check_kodepos();
     });
-    $("#gender").keyup(function () {
+    $("input[type='radio']").keyup(function () {
         check_gender();
     });
 
     function check_username(){
         const name = $("#username").val();
+        console.log('nama', name);
         const regEx = /^[a-zA-Z ]*$/;
         if(name.length == 0) {
             $("#username-error-message").html("Nama harus diisi");
@@ -110,33 +113,35 @@ $(document).ready(function(){
     }
 
     function check_kodepos(){
-        const kodePos = $("#kodepos").val();
+        var kodePos = $("#kodepos").val();
+
         if (kodePos.length == 0){
             $("#kodepos-error-message").html("Kodepos harus diisi");
             $("#kodepos-error-message").show();
             $("#kodepos").css({"border": "1px solid #c51244", "background-color": "rgba(197, 18, 68, 0.10"});
             error_kodepos = true;
         } else {
-            $("#country-error-message").hide();
-            $("#country").css({"border": "", "background-color": ""});
-            if (kodePos.length > 5){
+            $("#kodepos-error-message").hide();
+            $("#kodepos").css({"border": "", "background-color": ""});
+            if (kodePos.length < 5){
                 $("#kodepos-error-message").html("Maksimal 5 Digit");
                 $("#kodepos-error-message").show();
                 $("#kodepos").css({"border": "1px solid #c51244", "background-color": "rgba(197, 18, 68, 0.10"});
                 error_kodepos = true;
             } else {
-                $("#country-error-message").hide();
-                $("#country").css({"border": "", "background-color": ""});
+                $("#kodepos-error-message").hide();
+                $("#kodepos").css({"border": "", "background-color": ""});
             }
         }
     }
 
     function check_gender(){
-        const inputGender = $("input[type='radio']").val();
+        const inputGender = $("input[name='gender']:checked").val();
         console.log('radio', inputGender);
-        if ($(inputGender).length == 0) {
+        if (!inputGender) {
             $("#gender-error-message").html("Silahkan pilih gender");
             $("#gender-error-message").show();
+            $("input[name='gender']").css(({"border": "1px solid #c51244", "background-color": "rgba(197, 18, 68, 0.10"}))
             error_gender = true;
         } else {
             $("#gender-error-message").hide();
