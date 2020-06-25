@@ -5,7 +5,7 @@ $(document).ready(function(){
     $("#address-error-message").hide();
     $("#country-error-message").hide();
     $("#kodepos-error-message").hide();
-    $("#password-error-message").hide();
+    $("#psw-error-message").hide();
     $("#retypePwd-error-message").hide();
 
     var error_username = false;
@@ -13,6 +13,8 @@ $(document).ready(function(){
     var error_gender = false;
     var error_address = false;
     var error_kodepos = false;
+    var error_country = false;
+    var error_password = false;
 
     $("#username").keyup(function(){
         check_username();
@@ -31,6 +33,12 @@ $(document).ready(function(){
     $("input[type='radio']").keyup(function () {
         check_gender();
     });
+    $("#country").keyup(function(){
+        check_country();
+    })
+    $("#psw").keyup(function () {
+        check_password();
+    })
 
     function check_username(){
         const name = $("#username").val();
@@ -61,6 +69,7 @@ $(document).ready(function(){
 
     function check_email(){
         const email = $("#email").val();
+        console.log('email', email);
         const mailReq = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
         if ($("#email").val() == "") {
             $("#email-error-message").html("email harus diisi");
@@ -92,7 +101,9 @@ $(document).ready(function(){
     }
 
     function check_address(){
-        if ($('#address').val().length > 100) {
+        const address = $("#address");
+        console.log('Alamat', address);
+        if ($(address).val().length > 100) {
             $("#address-error-message").html("Alamat tidak lebih dari 100 karakter");
             $("#address-error-message").show();
             $("#address").css({"border": "1px solid #c51244", "background-color": "rgba(197, 18, 68, 0.10"});
@@ -112,8 +123,23 @@ $(document).ready(function(){
         }
     }
 
+    function check_country(){
+        const selectCountry = $("#country").val();
+        console.log('Negara', selectCountry);
+        if (selectCountry == ""){
+            $("#country-error-message").html("Negara harus dipilih");
+            $("#country-error-message").show();
+            $("#country").css({"border": "1px solid #c51244", "background-color": "rgba(197, 18, 68, 0.10"});
+            error_country = true;
+        } else {
+            $("#country-error-message").hide();
+            $("#country").css({"border": "", "background-color": ""});
+        }
+    }
+
     function check_kodepos(){
         var kodePos = $("#kodepos").val();
+        console.log('Kodepos', kodePos);
 
         if (kodePos.length == 0){
             $("#kodepos-error-message").html("Kodepos harus diisi");
@@ -137,7 +163,7 @@ $(document).ready(function(){
 
     function check_gender(){
         const inputGender = $("input[name='gender']:checked").val();
-        console.log('radio', inputGender);
+        console.log('Kelamin', inputGender);
         if (!inputGender) {
             $("#gender-error-message").html("Silahkan pilih gender");
             $("#gender-error-message").show();
@@ -146,7 +172,29 @@ $(document).ready(function(){
         } else {
             $("#gender-error-message").hide();
         }
+    }
 
+    function check_password(){
+        const password = $("#psw").val();
+        console.log('psw', password);
+        if (password.length == "") {
+            $("#psw-error-message").html("Silahkan masukkan password");
+            $("#psw-error-message").show();
+            $("#psw").css({"border": "1px solid #c51244", "background-color": "rgba(197, 18, 68, 0.10"})
+            error_password = true;
+        } else {
+            $("#psw-error-message").hide();
+            $("#psw").css({"border": "", "background-color": ""});
+            if (password.length < 8) {
+                $("#psw-error-message").html("Password minimal 8 karakter");
+                $("#psw-error-message").show();
+                $("#psw").css({"border": "1px solid #c51244", "background-color": "rgba(197, 18, 68, 0.10"})
+                error_password = true;                
+            } else {
+                $("#psw-error-message").hide();
+                $("#psw").css({"border": "", "background-color": ""});                
+            }
+        }
     }
 
     $("#submit").click(function(){
@@ -155,15 +203,19 @@ $(document).ready(function(){
         error_address = false;
         error_kodepos = false;
         error_gender = false;
+        error_country = false;
+        error_password = false;
 
         check_username();
         check_email();
         check_address();
         check_kodepos();
         check_gender();
+        check_country();
+        check_password();
 
-        if(error_username == false && error_email == false 
-            && error_address == false && error_kodepos == false && error_gender == false){
+        if  (error_username == false && error_email == false && error_country == false
+            && error_address == false && error_kodepos == false && error_gender == false && error_password == false){
             return true;
         } else {
             return false;
