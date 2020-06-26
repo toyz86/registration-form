@@ -14,55 +14,56 @@
             <h1>Registration Form</h1>
         <hr>
         <label><b>Nama Lengkap</b></label>
-            <input type="text" placeholder="Your Full Name" class="username" id="username">
+            <input type="text" placeholder="Your Full Name" class="error" id="username">
             <span class="error-message" id="username-error-message"></span>
         <br>
         <label><b>Email</b></label>
-            <input type="text" placeholder="example: test@example.com" class="email" id="email">
+            <input type="text" placeholder="example: test@example.com" class="error" id="email">
             <span class="error-message" id="email-error-message"></span>
         <br>
 
         <label for="gender"><b>Jenis Kelamin</b></label>
         <br>
-            <input type="radio" name="gender" value="Pria" id="gender" >Pria
-            <input type="radio" name="gender" value="wanita" id="gender" >Wanita
+            <input type="radio" name="gender" value="Pria" id="gender" class="error">Pria
+            <input type="radio" name="gender" value="wanita" id="gender" class="error">Wanita
             <span class="error-message" id="gender-error-message"></span>
         <br>
 
         <label class="mt-4"><b>Alamat</b></label>
         <br>
-            <textarea name="address" id="address"></textarea>
+            <textarea name="address" id="address" class="error" ></textarea>
             <span class="error-message" id="address-error-message"></span>
         <br>
 
         <label class="mt-4"><b>Negara</b></label><br>
         <span class="error-message" id="country-error-message"></span>
-            <select name="country" id="country" >
+            <select name="country" id="country" class="error">
                 <option selected value>(Please Select a Country</option>
-                <option>Australia</option>
-                <option>Canada</option>
-                <option>India</option>
-                <option>Russia</option>
-                <option>USA</option>
+                <option value="AF">Australia</option>
+                <option value="AL">Canada</option>
+                <option value="DZ">India</option>
+                <option value="AS">Russia</option>
+                <option value="AD">USA</option>
             </select>
         <br>
         
         <label class="mt-4"><b>Kodepos</b></label>
-            <input type="text" name="kodepos" id="kodepos" maxlength="5">
+            <input type="text" name="kodepos" id="kodepos" maxlength="5" class="error">
             <span class="error-message" id="kodepos-error-message" style="top:62em" ></span>
         
         <label for="psw"><b>Password</b></label>
-            <input type="password" name="psw" id="psw" maxlength="32" >
+            <input type="password" name="psw" id="psw" class="error" maxlength="32" >
             <span class="error-message" id="psw-error-message" style="top:72em"></span>
 
         <label for="retypepassword"><b>Konfirmasi Password</b></label>
-            <input type="password" name="retypepassword" id="retypePsw" maxlength="5">
-            <span class="error-message" id="retypePwd-error-message"></span>
+            <input type="password" name="retypepassword" id="retypePsw" class="error">
+            <span class="error-message" id="retypePwd-error-message" style="top:81em"></span>
 
         <label for="agreement"><b>Syarat & Ketentuan</b></label><br>
         <label>
-            <input type="checkbox" name="agreement" id="agreement">
+            <input type="checkbox" name="agreement" id="agreement" class="error">
             <span class="ml-2" >Anda setuju dengan syarat dan ketentuan yang berlaku</span>
+            <span class="error-message" id="agreement-error-message" style="top:90em"></span>
         </label>
         <hr>
 
