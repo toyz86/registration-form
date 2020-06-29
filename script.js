@@ -249,7 +249,7 @@ $(document).ready(function(){
         $("input[type='radio']").click(function () {
             check_gender();
         });
-        $("#country").click(function(){
+        $("#country").change(function(){
             check_country();
         })
         $("#psw").keyup(function () {
