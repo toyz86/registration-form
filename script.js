@@ -21,36 +21,6 @@ $(document).ready(function(){
     var error_retypePsw = false;
     var error_agreement = false;
 
-    $("#username").keyup(function(){
-        check_username();
-    });
-    $("#email").keyup(function () {
-        check_email();
-    });
-    $("#address").keyup(function () {
-        check_address();
-    });
-    $("#kodepos").on('keyup', function () {
-        var numVal = $(this).val().replace(/[^0-9.]/g, "");
-        $(this).val(numVal);
-        check_kodepos();
-    });
-    $("input[type='radio']").click(function () {
-        check_gender();
-    });
-    $("#country").click(function(){
-        check_country();
-    })
-    $("#psw").keyup(function () {
-        check_password();
-    })
-    $("#retypePsw").keyup(function () {
-        check_retypePsw();
-    })
-    $("#agreement").click(function () {
-        check_agreement();
-    })
-
     function check_username(){
         const name = $("#username").val();
         console.log('nama', name);
@@ -262,6 +232,36 @@ $(document).ready(function(){
         error_retypePsw = false;
         error_agreement = false;
 
+        $("#username").keyup(function(){
+            check_username();
+        });
+        $("#email").keyup(function () {
+            check_email();
+        });
+        $("#address").keyup(function () {
+            check_address();
+        });
+        $("#kodepos").on('keyup', function () {
+            var numVal = $(this).val().replace(/[^0-9.]/g, "");
+            $(this).val(numVal);
+            check_kodepos();
+        });
+        $("input[type='radio']").click(function () {
+            check_gender();
+        });
+        $("#country").click(function(){
+            check_country();
+        })
+        $("#psw").keyup(function () {
+            check_password();
+        })
+        $("#retypePsw").keyup(function () {
+            check_retypePsw();
+        })
+        $("#agreement").click(function () {
+            check_agreement();
+        })
+        
         check_username();
         check_email();
         check_address();
