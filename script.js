@@ -163,9 +163,9 @@ $(document).ready(function(){
     }
 
     function check_password(){
-        const pswLength = $("#psw").val().length;
-        console.log('psw', pswLength);
-        if (pswLength == "") {
+        const userPsw = $("#psw").val();
+        const pswContain = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W\_])[A-Za-z\d\W\_]{8,32}$/;
+        if (userPsw == "") {
             $("#psw-error-message").html("Silahkan masukkan password");
             $("#psw-error-message").show();
             $("#psw").addClass('error');
@@ -173,7 +173,7 @@ $(document).ready(function(){
         } else {
             $("#psw-error-message").hide();
             $("#psw").removeClass('error');
-            if (pswLength < 8) {
+            if (userPsw.length < 8) {
                 $("#psw-error-message").html("Password minimal 8 karakter");
                 $("#psw-error-message").show();
                 $("#psw").addClass('error');
@@ -181,6 +181,15 @@ $(document).ready(function(){
             } else {
                 $("#psw-error-message").hide();
                 $("#psw").removeClass('error');
+                if (!userPsw.match(pswContain) != ' '){
+                    $("#psw-error-message").html("Password tidak valid");
+                    $("#psw-error-message").show();
+                    $("#psw").addClass('error');
+                    error_password = true;                
+                } else {
+                    $("#psw-error-message").hide();
+                    $("#psw").removeClass('error');              
+                }
             }
         }
     }
