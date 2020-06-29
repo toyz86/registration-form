@@ -313,12 +313,18 @@ $(document).ready(function(){
             loadingIcon.css("display", "none");
             $.ajax({
               url: "http://dummy.restapiexample.com/api/v1/create",
-              data: $(this).serialize(),
+              data: {
+                  name: 'Gatot',
+                  salary: '99999',
+                  age: '9999'
+              },
               method: "POST",
-              dataType: "JSON"
-            }).done(function() {
-              alert("Simpan Data Gagal");
-            });
+              dataType: "json",
+              success: function(data){
+                  console.log(data);
+                  alert('Simpan Data Gagal');
+              }
+            })
         }, 3000);
     });
 })
