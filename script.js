@@ -11,6 +11,9 @@ $(document).ready(function(){
 
     $(".error").removeClass();
 
+    const loadingBg = $("#loading-bg");
+    const loadingIcon = $("#loading");
+
     var error_username = false;
     var error_email = false;
     var error_gender = false;
@@ -298,5 +301,24 @@ $(document).ready(function(){
             return false;
         }
     })
-    
+
+    $('#formRegister').on('submit', function(e){
+        e.preventDefault();
+
+        loadingBg.css("display", "block");
+        loadingIcon.css("display", "block");
+
+        setTimeout(function() {
+            loadingBg.css("display", "none");
+            loadingIcon.css("display", "none");
+            $.ajax({
+              url: "http://dummy.restapiexample.com/api/v1/create",
+              data: $(this).serialize(),
+              method: "POST",
+              dataType: "JSON"
+            }).done(function() {
+              alert("Simpan Data Gagal");
+            });
+        }, 3000);
+    });
 })

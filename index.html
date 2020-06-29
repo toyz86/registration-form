@@ -9,9 +9,9 @@
 </head>
 <title>Registration Form</title>
 <body>
-    <form>
-        <div class="container">
-            <h1>Registration Form</h1>
+<form action="http://dummy.restapiexample.com/api/v1/create" method="POST" id="formRegister">
+    <div class="container">
+        <h1>Registration Form</h1>
         <hr>
         <label><b>Nama Lengkap</b></label>
             <input type="text" placeholder="Your Full Name" class="error" id="username">
@@ -70,6 +70,8 @@
         <button type="submit" id="submit" class="registerBtn">Submit</button>
     </div>
 </form>
+<div id="loading-bg"></div>
+<div id="loading"></div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="script.js"></script>
