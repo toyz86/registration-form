@@ -21,6 +21,14 @@ $(document).ready(function(){
     var error_retypePsw = false;
     var error_agreement = false;
 
+    // menonaktifkan input text pada saat belum divalidasi
+    $("#kodepos").on("keypress keyup blur",function (event) {
+        $("#kodepos").val($("#kodepos").val().replace(/[^\d].+/, ""));
+        if ((event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+    })
+
     function check_username(){
         const name = $("#username").val();
         console.log('nama', name);
@@ -137,7 +145,7 @@ $(document).ready(function(){
             $("#kodepos-error-message").hide();
             $("#kodepos").removeClass('error');
             if (kodePos.length < 5){
-                $("#kodepos-error-message").html("Maksimal 5 Digit");
+                $("#kodepos-error-message").html("Kodepos harus 5 karakter");
                 $("#kodepos-error-message").show();
                 $("#kodepos").addClass('error');
                 error_kodepos = true;
@@ -250,9 +258,11 @@ $(document).ready(function(){
         $("#address").keyup(function () {
             check_address();
         });
-        $("#kodepos").on('keyup', function () {
-            var numVal = $(this).val().replace(/[^0-9.]/g, "");
-            $(this).val(numVal);
+        $("#kodepos").on("keypress keyup blur",function (event) {
+           $(this).val($(this).val().replace(/[^\d].+/, ""));
+            if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
             check_kodepos();
         });
         $("input[type='radio']").click(function () {
