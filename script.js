@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
     $("#username-error-message").hide();
     $("#email-error-message").hide();
     $("#gender-error-message").hide();
@@ -322,7 +323,10 @@ $(document).ready(function(){
               dataType: "json",
               success: function(data){
                   console.log(data);
-                  alert('Simpan Data Gagal');
+                  alert('Simpan Data Sukses');
+              },
+              error: function(data){
+                  alert('Simpan data gagal');
               }
             })
         }, 3000);
