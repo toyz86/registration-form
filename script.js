@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+    // Hide pesan error ketika halaman baru dibuka
     $("#username-error-message").hide();
     $("#email-error-message").hide();
     $("#gender-error-message").hide();
@@ -10,8 +10,10 @@ $(document).ready(function(){
     $("#retypePwd-error-message").hide();
     $("#agreement-error-message").hide();
 
+    // Hide class error ketika halaman baru dibuka
     $(".error").removeClass();
 
+    // Variable component loading data
     const loadingBg = $("#loading-bg");
     const loadingIcon = $("#loading");
 
@@ -25,7 +27,8 @@ $(document).ready(function(){
     var error_retypePsw = false;
     var error_agreement = false;
 
-    // menonaktifkan input text pada saat belum divalidasi
+
+    // menonaktifkan input text kodepos pada saat belum divalidasi
     $("#kodepos").on("keypress keyup blur",function (event) {
         $("#kodepos").val($("#kodepos").val().replace(/[^\d].+/, ""));
         if ((event.which < 48 || event.which > 57)) {
@@ -33,34 +36,39 @@ $(document).ready(function(){
         }
     })
 
+    // CALLBACK kalau validasi tidak sukses maka akan muncul pesan error
+    function errorMessage(selectorId, idErrorMessage, message) {
+        $(idErrorMessage).html(message);
+        $(idErrorMessage).show();
+        $(selectorId).addClass('error');
+    }
+    // CALLBACK Kalau Validasi sukses maka pesan error hilang
+    function hideMessage(selectorErrorMessage, selectorIdMessage) {
+        $(selectorErrorMessage).hide();
+        $(selectorIdMessage).removeClass('error');
+    }
+
+    // BEGIN VALIDATION INPUT FUNCTION
     function check_username(){
         const name = $("#username").val();
         console.log('nama', name);
+        // contain only uppercase and lowercase
         const regEx = /^[a-zA-Z ]*$/;
         if(name.length == 0) {
-            $("#username-error-message").html("Nama harus diisi");
-            $("#username-error-message").show();
-            $("#username").addClass('error');
+            errorMessage("#username", "#username-error-message", "Nama harus diisi");
             error_username = true
         } else {
-            $("#username-error-message").hide();
-            $("#username").removeClass('error');
+            hideMessage("#username-error-message", "#username");
             if (name.length < 3 || name.length > 50) {
-                $("#username-error-message").html("Nama min. 3 karakter & max. 50 karakter");
-                $("#username-error-message").show();
-                $("#username").addClass('error');
+                errorMessage("#username", "#username-error-message", "Nama min. 3 karakter & max. 50 karakter");
                 error_username = true
             } else {
-                $("#username-error-message").hide();
-                $("#username").removeClass('error');
+                hideMessage("#username-error-message", "#username");
                 if (!name.match(regEx) != ' ') {
-                    $("#username-error-message").html("Nama hanya boleh berisi alfabet dan spasi");
-                    $("#username-error-message").show();
-                    $("#username").addClass('error');
+                    errorMessage("#username", "#username-error-message", "Nama hanya boleh berisi alfabet dan spasi");
                     error_username = true
                 } else {
-                    $("#username-error-message").hide();
-                    $("#username").removeClass('error');
+                    hideMessage("#username-error-message", "#username");
                 }
             }
         }
@@ -69,31 +77,23 @@ $(document).ready(function(){
     function check_email(){
         const email = $("#email").val();
         console.log('email', email);
+        //reGex untuk validasi email
         const mailReq = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
         if ($("#email").val() == "") {
-            $("#email-error-message").html("email harus diisi");
-            $("#email-error-message").show();
-            $("#email").addClass('error');
+            errorMessage("#email", "#email-error-message", "email harus diisi");
             error_email = true;
         } else {
-            $("#email-error-message").hide();
-            $("#email").removeClass('error');
+            hideMessage("#email-error-message", "#email");
             if (!email.match(mailReq) != '') {
-                $("#email-error-message").html("email tidak valid");
-                $("#email-error-message").show();
-                $("#email").addClass('error');
+                errorMessage("#email", "#email-error-message", "email tidak valid");
                 error_email = true
             } else {
-                $("#email-error-message").hide();
-                $("#email").removeClass('error');;
+                hideMessage("#email-error-message", "#email");
                 if ($("#email").val().length > 50) {
-                    $("#email-error-message").html("maksimal 50 karakter");
-                    $("#email-error-message").show();
-                    $("#email").addClass('error');
+                    errorMessage("#email", "#email-error-message", "maksimal 50 karakter");
                     error_email = true;                    
                 } else {
-                    $("#email-error-message").hide();
-                    $("#email").removeClass('error');
+                    hideMessage("#email-error-message", "#email");
                 }
             }
         }
@@ -103,20 +103,18 @@ $(document).ready(function(){
         const address = $("#address");
         console.log('Alamat', address);
         if ($(address).val().length > 100) {
-            $("#address-error-message").html("Alamat tidak lebih dari 100 karakter");
-            $("#address-error-message").show();
+            errorMessage("#address", "#address-error-message", "Alamat tidak lebih dari 100 karakter");
             $("#address").css({"border": "1px solid #c51244", "background-color": "rgba(197, 18, 68, 0.10", "box-shadow": "1px 1px maroon"});
             error_address = true;
         } else {
-            $("#address-error-message").hide();
+            hideMessage("#address-error-message", "#address");
             $("#address").css({"border": "", "background-color": "", "box-shadow": ""});
             if ($('#address').val().length == 0) {
-                $("#address-error-message").html("Alamat harus diisi");
-                $("#address-error-message").show();
+                errorMessage("#address", "#address-error-message", "Alamat harus diisi");
                 $("#address").css({"border": "1px solid #c51244", "background-color": "rgba(197, 18, 68, 0.10", "box-shadow": "1px 1px maroon"});
                 error_address = true;
             } else {
-                $("#address-error-message").hide();
+                hideMessage("#address-error-message", "#address");
                 $("#address").css({"border": "", "background-color": "", "box-shadow": ""});
             }
         }
@@ -126,12 +124,11 @@ $(document).ready(function(){
         const selectCountry = $("#country option:selected").val();
         console.log('Negara', selectCountry);
         if (!selectCountry){
-            $("#country-error-message").html("Negara harus dipilih");
-            $("#country-error-message").show();
+            errorMessage("#country", "#country-error-message", "Negara harus dipilih");
             $("#country").css({"border": "1px solid #c51244", "background-color": "rgba(197, 18, 68, 0.10", "box-shadow": "1px 1px maroon"});
             error_country = true;
         } else {
-            $("#country-error-message").hide();
+            hideMessage("#country-error-message", "#country");
             $("#country").css({"border": "", "background-color": "", "box-shadow": ""});
         }
     }
@@ -141,66 +138,51 @@ $(document).ready(function(){
         console.log('Kodepos', kodePos);
 
         if (kodePos.length == 0){
-            $("#kodepos-error-message").html("Kodepos harus diisi");
-            $("#kodepos-error-message").show();
-            $("#kodepos").addClass('error');
+            errorMessage("#kodepos", "#kodepos-error-message", "Kodepos harus diisi");
             error_kodepos = true;
         } else {
-            $("#kodepos-error-message").hide();
-            $("#kodepos").removeClass('error');
+            hideMessage("#kodepos-error-message", "#kodepos");
             if (kodePos.length < 5){
-                $("#kodepos-error-message").html("Kodepos harus 5 karakter");
-                $("#kodepos-error-message").show();
-                $("#kodepos").addClass('error');
+                errorMessage("#kodepos", "#kodepos-error-message", "Kodepos harus 5 karakter");
                 error_kodepos = true;
             } else {
-                $("#kodepos-error-message").hide();
-                $("#kodepos").removeClass('error');
+                hideMessage("#kodepos-error-message", "#kodepos");
             }
         }
     }
 
     function check_gender(){
         const inputGender = $("input[name='gender']:checked").val();
+        const genderId = $("input[name='gender']");
         console.log('Kelamin', inputGender);
         if (!inputGender) {
-            $("#gender-error-message").html("Silahkan pilih gender");
-            $("#gender-error-message").show();
-            $("input[name='gender']").addClass('error');
+            errorMessage(genderId, "#gender-error-message", "Silahkan pilih gender");
             error_gender = true;
         } else {
-            $("#gender-error-message").hide();
-            $("input[name='gender']").removeClass('error');
+            hideMessage("#gender-error-message", genderId);
         }
     }
 
     function check_password(){
         const userPsw = $("#psw").val();
+        // pswContain reGex password contain min 1 lowercase, 1 Uppercase, 
+        // 1 special character, min 8 and max 32 character
         const pswContain = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W\_])[A-Za-z\d\W\_]{8,32}$/;
         if (userPsw == "") {
-            $("#psw-error-message").html("Silahkan masukkan password");
-            $("#psw-error-message").show();
-            $("#psw").addClass('error');
+            errorMessage("#psw", "#psw-error-message", "Silahkan masukkan password");
             error_password = true;
         } else {
-            $("#psw-error-message").hide();
-            $("#psw").removeClass('error');
+            hideMessage("#psw-error-message", "#psw");
             if (userPsw.length < 8) {
-                $("#psw-error-message").html("Password minimal 8 karakter");
-                $("#psw-error-message").show();
-                $("#psw").addClass('error');
+                errorMessage("#psw", "#psw-error-message", "Password minimal 8 karakter");
                 error_password = true;                
             } else {
-                $("#psw-error-message").hide();
-                $("#psw").removeClass('error');
+                hideMessage("#psw-error-message", "#psw");
                 if (!userPsw.match(pswContain) != ' '){
-                    $("#psw-error-message").html("Password tidak valid");
-                    $("#psw-error-message").show();
-                    $("#psw").addClass('error');
+                    errorMessage("#psw", "#psw-error-message", "Password tidak valid");
                     error_password = true;                
                 } else {
-                    $("#psw-error-message").hide();
-                    $("#psw").removeClass('error');              
+                    hideMessage("#psw-error-message", "#psw");
                 }
             }
         }
@@ -210,21 +192,15 @@ $(document).ready(function(){
         const psw = $("#psw").val();
         const confirmPsw = $("#retypePsw").val();
         if (confirmPsw.length == ""){
-            $("#retypePwd-error-message").html("Confirm Password harus diisi");
-            $("#retypePwd-error-message").show();
-            $("#retypePsw").addClass('error');
+            errorMessage("#retypePsw", "#retypePwd-error-message", "Confirm Password harus diisi")
             error_retypePsw = true;
         } else {
-            $("#retypePwd-error-message").hide();
-            $("#retypePsw").removeClass('error');
+            hideMessage("#retypePwd-error-message", "#retypePsw");
             if (confirmPsw != psw){
-                $("#retypePwd-error-message").html("Harus sama dengan password");
-                $("#retypePwd-error-message").show();
-                $("#retypePsw").addClass('error');
+                errorMessage("#retypePsw", "#retypePwd-error-message", "Harus sama dengan password");
                 error_retypePsw = true;
             } else {
-                $("#retypePwd-error-message").hide();
-                $("#retypePsw").removeClass('error');
+                hideMessage("#retypePwd-error-message", "#retypePsw");
             }
         }
     }
@@ -232,15 +208,13 @@ $(document).ready(function(){
     function check_agreement(){
         const agree = $("input[name='agreement']:checked").val();
         if (!agree){
-            $("#agreement-error-message").html("Anda harus menyetujui syarat dan ketentuan");
-            $("#agreement-error-message").show();
-            $("#agreement").addClass('error');
+            errorMessage("#agreement", "#agreement-error-message", "Anda harus menyetujui syarat dan ketentuan");
             error_agreement = true;
         } else {
-            $("#agreement-error-message").hide();
-            $("#agreement").removeClass('error');
+            hideMessage("#agreement-error-message", "#agreement");
         }
     }
+    // END VALIDATION FUNCTIONS
 
     $("#submit").click(function(){
         error_username = false;
@@ -253,6 +227,7 @@ $(document).ready(function(){
         error_retypePsw = false;
         error_agreement = false;
 
+        // VALIDATION PROCESS WHEN FILL INPUT DATA
         $("#username").keyup(function(){
             check_username();
         });
@@ -263,6 +238,7 @@ $(document).ready(function(){
             check_address();
         });
         $("#kodepos").on("keypress keyup blur",function (event) {
+            // cuma untuk validasi numeric, keypress alphabet disabled
            $(this).val($(this).val().replace(/[^\d].+/, ""));
             if ((event.which < 48 || event.which > 57)) {
                 event.preventDefault();
@@ -285,6 +261,7 @@ $(document).ready(function(){
             check_agreement();
         })
         
+        // Menjalankan fungsi validasi data
         check_username();
         check_email();
         check_address();
